@@ -2,17 +2,23 @@
   "name": "ksql-lint",
   "version": "1.0.0",
   "description": "",
+  "keywords": ["ksql", "lint"],
+  "author": "Andrew Gits",
+  "homepage": "https://github.com/thekiwi/ksql-lint",
+  "bugs": "https://github.com/thekiwi/ksql-lint/issues",
+  "license": "MIT",
   "main": "./src/api.js",
   "type": "module",
   "bin": {
     "ksql-lint": "./bin/ksql-lint.js"
   },
+  "files": [
+    "lib/**/*.js",
+    "src/**/*.js"
+  ],
   "scripts": {
     "test": "mocha test/"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "antlr4": "^4.10.0",
     "commander": "^9.1.0",
