@@ -5,7 +5,7 @@ mkdir grammars
 curl --http1.1 https://raw.githubusercontent.com/confluentinc/ksql/master/ksqldb-parser/src/main/antlr4/io/confluent/ksql/parser/SqlBase.g4 --output grammars/SqlBase.g4
 
 # then, comment out a few hard-coded 'Java' lines from the grammar... 
-sed -i '' 's/public static final/\/\/public static final/g' grammars/SqlBase.g4
+sed -i'' -e 's/public static final/\/\/public static final/g' grammars/SqlBase.g4
 
 # build the parser
 rm -rf .antlr
