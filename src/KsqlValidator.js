@@ -9,14 +9,12 @@ class SyntaxErrorListener extends antlr4.error.ErrorListener {
         this.errors = [];
     }
     syntaxError(recognizer, offendingSymbol, line, column, message, err) {
-        // console.error(`[ERROR]: ${offendingSymbol} line ${line}, col ${column}: ${msg}`);
         this.errors.push({
             symbol: offendingSymbol.toString(),
             line,
             column,
             message
         });
-        // console.log(offendingSymbol);
     }
 }
 

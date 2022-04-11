@@ -7,38 +7,38 @@ import KsqlValidator from './KsqlValidator.js';
 const program = new Command();
 program
     .name('ksql-lint')
-    .argument('<glob...>', 'ksql files to lint');
+    .usage('./migrations/*.ksql')
+    .argument('<glob>', 'ksql files to lint')
+    .showHelpAfterError();
 
 program.parse();
 
-const errors = [];
-const options = {};
+const options = { nodir: true };
+const files = [];
 program.args.forEach(arg => {
-    const files = glob.sync(arg, options);
-    files.forEach(filePath => {
-        const contents = fs.readFileSync(filePath).toString(); 
-        const messages = KsqlValidator.validate(contents);
-        if (messages.length) {
-            errors.push({ filePath, messages });
-        }
-    });
+    glob.sync(arg, options).forEach(f => files.push(f));
+});
+
+const errors = [];
+files.forEach(filePath => {
+    const contents = fs.readFileSync(filePath).toString(); 
+    const messages = KsqlValidator.validate(contents);
+    if (messages.length) {
+        errors.push({ filePath, messages });
+    }
 });
 
 if (errors.length) {
-    // errors.forEach(e => console.error(e));
-
     let count = 0;
     errors.forEach(e => {
-        // console.log(path.resolve(e.filePath));
         e.messages.forEach(msg => {
-            // console.log(`  ${msg.line}:${msg.column}\terror\t${msg.message}\t${msg.symbol}`);
-            console.log(`${path.resolve(e.filePath)}(${msg.line},${msg.column}): error : ${msg.message}`);
+            console.log(`${path.resolve(e.filePath)}:${msg.line}:${msg.column} \n  error : ${msg.message}`);
             count++;
         });
     });
-    console.error(`✖ ${count} errors across ${errors.length} files`)
+    console.error(`${count} error${count > 1 ? 's' : ''} across ${errors.length} file${errors.length > 1 ? 's' : ''}`)
     process.exit(1);
 } else {
-    console.log('0 errors found');
+    console.log(`Checked ${files.length} files, found 0 errors`);
     process.exit(0);
 }

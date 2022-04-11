@@ -5,6 +5,7 @@ chai.should();
 
 describe('KsqlValidator', () => {
     describe('#validate()', () => {
+
         it('validates lowercase commands', () => {
             const errors = KsqlValidator.validate('list topics;');
             errors.should.be.empty;
@@ -18,13 +19,13 @@ describe('KsqlValidator', () => {
         it('reports a missing semicolon', () => {
             const errors = KsqlValidator.validate('list topics');
             errors.should.have.lengthOf(1);
-            errors[0].should.have.property('msg').match(/missing ';' at '<EOF>'/);
+            errors[0].should.have.property('message').match(/missing ';' at '<EOF>'/);
         });
 
         it('reports an unknown keyword', () => {
             const errors = KsqlValidator.validate('foo topics');
             errors.should.have.lengthOf(1);
-            errors[0].should.have.property('msg').match(/^mismatched input 'foo' expecting/);
+            errors[0].should.have.property('message').match(/^mismatched input 'foo' expecting/);
         });
 
         it('supports comments', () => {
@@ -36,5 +37,6 @@ describe('KsqlValidator', () => {
             const errors = KsqlValidator.validate('list topics;\nlist streams;');
             errors.should.be.empty;
         });
+        
     });
 });

@@ -2,10 +2,10 @@
   "name": "ksql-lint",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/api.js",
   "type": "module",
   "bin": {
-    "ksql-lint": "./bin/ksql-lint"
+    "ksql-lint": "./bin/ksql-lint.js"
   },
   "scripts": {
     "test": "mocha test/"
@@ -14,12 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "antlr4": "^4.9.3",
+    "antlr4": "^4.10.0",
     "commander": "^9.1.0",
-    "glob": "^7.2.0"
+    "glob": "^8.0.1"
   },
   "devDependencies": {
     "chai": "^4.3.6",
-    "mocha": "^9.2.2"
+    "mocha": "^9.2.2",
+    "sinon": "^13.0.1"
   }
 }
