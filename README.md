@@ -13,3 +13,7 @@ When linting files, ksql-lint will exit with one of the following exit codes:
 0: Linting was successful and there are no errors.
 
 1: Linting was successful and there is at least one linting error.
+
+## ANTLR version
+
+This CLI currently uses ANTLR 4.12. To upgrade, it requires changing both the `package.json` dependency AND the Docker image tag used in `generate.sh`. 

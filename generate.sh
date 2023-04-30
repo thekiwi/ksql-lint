@@ -10,4 +10,4 @@ sed -i'' -e 's/public static final/\/\/public static final/g' grammars/SqlBase.g
 # build the parser
 rm -rf .antlr
 rm -rf lib
-docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v `pwd`:/work any0ne22/antlr4:latest java -Xmx500M -cp /usr/local/lib/antlr4-tool.jar org.antlr.v4.Tool -o lib/ -Xexact-output-dir -Dlanguage=JavaScript grammars/SqlBase.g4
+docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v `pwd`:/work any0ne22/antlr4:4.12.0 java -Xmx500M -cp /usr/local/lib/antlr4-tool.jar org.antlr.v4.Tool -o lib/ -Xexact-output-dir -Dlanguage=JavaScript grammars/SqlBase.g4
